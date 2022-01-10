@@ -1,0 +1,66 @@
+<mat-toolbar color="primary" class="corpo"> <!--   -->
+  <img src="/assets/imagem/PataLogo.png" alt="Logo-Pata" id="logoPata" (click)="restart()">
+  <a href="" (click)="restart()">Jogo da Memória</a>
+</mat-toolbar>
+
+<main>
+  <div *ngIf="showInicio">
+
+    <h1 class="titulo">Iniciar Jogo: Escolha a dificuldade</h1>
+    <div id="dificuldades">
+      <ul>
+        <li>
+          <button class="botao facil" (click)='iniciarJogo(1)'>
+            Fácil
+          </button>
+        </li>
+        <li>
+          <button class="botao" (click)='iniciarJogo(2)'>
+            Normal
+          </button>
+        </li>
+        <li>
+          <button class="botao dificil" (click)='iniciarJogo(3)'>
+            Difícil
+          </button>
+        </li>
+<!--         <li>
+          <button class="botao dificil" (click)='iniciarJogo(4)'>
+            Teste
+          </button>
+        </li> -->
+
+      </ul>
+    </div>
+  </div>
+  <div class="caixaTexto" *ngIf="showJogo">
+    <h1 class="texto"> Clique em uma carta para virar ela. Você pode virar no máximo, duas cartas por vez. Quando achar
+      os pares, eles irão sumir da tela. <br> Boa sorte!
+    </h1>
+
+    <h2 class="texto">Tentativas: {{ tentativas }} </h2>
+
+    <div>
+      <countdown id="cronometro" #cd [config]="timerConfig" (event)="gatilhoCronometro($event)"></countdown>
+    </div>
+    <div id="barraProgresso">
+      <mat-progress-bar mode="determinate" [value]="progresso"></mat-progress-bar>
+    </div>
+    <div class="cartas">
+      <app-game-card *ngFor="let carta of cartas; let idx = index" [carta]="carta" (clicado)="cartaClicada(idx)"
+        (click)="begin()">
+      </app-game-card>
+    </div>
+  </div>
+</main>
+<footer id="rodape">
+  <div>
+    - Card bichos é uma marca totalmente fícticia. -
+  </div>
+  <div style="font-size: large;">
+    Imagens dos animais e cartas pertencentes aos desenvolvedores © 2021.
+  </div>
+  <div style="font-size: small;">
+    Desenvolvido por <a href="https://github.com/gabifioranelli" target="_blank">Gabrielle</a>, <a href="https://github.com/guiCarvalhoSP" target="_blank">Guilherme</a>, <a href="https://github.com/lucasclf" target="_blank">Lucas</a>, <a href="https://github.com/Mateusfmac" target="_blank">Matheus</a>
+  </div>
+</footer>
